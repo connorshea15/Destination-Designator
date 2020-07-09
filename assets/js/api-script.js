@@ -1,7 +1,11 @@
-// This variable will hold the name of the current park to be displayed
-var parkName = "";
-
-
+// Object that will hold all of the current park's info
+var currentPark = {
+    name:"",
+    states:"",
+    url:"",
+    temp:"",
+    weather:""
+};
 
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
@@ -17,10 +21,13 @@ var getParkInfo = function(userInput) {
                 var parkArr = data.data[0].parks;
                 // I need a random number between 0 and the length of the parkArr
                 var randomIndex = Math.floor(Math.random() * parkArr.length);
-                //store the name of the current park in this variable 
-                parkName = parkArr[randomIndex].fullName;
-                console.log(parkArr[randomIndex]); 
-                console.log(parkName);
+                // store the name of the current park in this variable 
+                currentPark.name = parkArr[randomIndex].fullName;
+                // store the name of the current park's state in this variable 
+                currentPark.states = parkArr[randomIndex].states;
+                // store the current park's url
+                currentPark.url = parkArr[randomIndex].url;
+                console.log(currentPark);
                 // pass the park code into the getParkCoordinates function
                 getParkCoordinates(parkArr[randomIndex].parkCode)
             });
