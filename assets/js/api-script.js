@@ -3,6 +3,7 @@ var currentPark = {
     name:"",
     states:"",
     url:"",
+    imageUrl:"",
     temp:"",
     weather:""
 };
@@ -27,7 +28,6 @@ var getParkInfo = function(userInput) {
                 currentPark.states = parkArr[randomIndex].states;
                 // store the current park's url
                 currentPark.url = parkArr[randomIndex].url;
-                console.log(currentPark);
                 // pass the park code into the getParkCoordinates function
                 getParkCoordinates(parkArr[randomIndex].parkCode)
             });
@@ -44,10 +44,28 @@ var getParkCoordinates = function(parkCode) {
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data); 
+                // Change object property to reflect url of image of park
+                currentPark.imageUrl = data.data[0].images[0].url;
                 // grab the parks latitude and longitude, which will be passed to the weather API
-                console.log("lat = " + data.data[0].latitude);
-                console.log("long = " + data.data[0].longitude);
+                getParkWeather(data.data[0].latitude, data.data[0].longitude);
+            });
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    });
+};
+
+// pass lat and long of park to weather API to get current weather and description
+var getParkWeather = function(lat, lon) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily&units=imperial&appid=055086f19492c21b798cb63cdcd21457"
+
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                // Set the current parks temperature to api temperature
+                currentPark.temp = data.current.temp;
+                // Set the current park's weather description to the api description
+                currentPark.weather = data.current.weather[0].description;
             });
         } else {
             alert("Error: " + response.statusText);
@@ -56,3 +74,4 @@ var getParkCoordinates = function(parkCode) {
 };
 
 getParkInfo(userInput);
+console.log(currentPark);
