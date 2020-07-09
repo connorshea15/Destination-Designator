@@ -1,14 +1,28 @@
-// This is my javascript File
+// This variable will hold the name of the current park to be displayed
+var parkName = "";
+
+
+
+// This is just to mimic passing user input into the getParkInfo function
+var userInput = "hunting";
 
 // This function will accept the user input activity type and search the park database for parks associated with that activity
-var getParkInfo = function() {
-    var apiUrl = "https://developer.nps.gov/api/v1/activities/parks?q=hunting&api_key=SL6NUAYKuQc9Oci5uYIesi64ujlohyYU5Oshn7zb";
+var getParkInfo = function(userInput) {
+    var apiUrl = "https://developer.nps.gov/api/v1/activities/parks?q=" + userInput + "&api_key=SL6NUAYKuQc9Oci5uYIesi64ujlohyYU5Oshn7zb";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
+                // Save the array of park objects in variable parkArr
+                var parkArr = data.data[0].parks;
+                // I need a random number between 0 and the length of the parkArr
+                var randomIndex = Math.floor(Math.random() * parkArr.length);
+                //store the name of the current park in this variable 
+                parkName = parkArr[randomIndex].fullName;
+                console.log(parkArr[randomIndex]); 
+                console.log(parkName);
                 // pass the park code into the getParkCoordinates function
-                getParkCoordinates(data.data[0].parks[0].parkCode)
+                getParkCoordinates(parkArr[randomIndex].parkCode)
             });
         } else {
             alert("Error: " + response.statusText);
@@ -34,5 +48,4 @@ var getParkCoordinates = function(parkCode) {
     });
 };
 
-
-getParkInfo();
+getParkInfo(userInput);
