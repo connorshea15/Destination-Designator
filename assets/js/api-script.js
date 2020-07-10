@@ -7,10 +7,8 @@ var currentPark = {
     temp:"",
     weather:""
 };
-
 //Local storage variable to hold array of saved park objects
 var savedParks = [];
-
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -90,4 +88,20 @@ var saveParks = function() {
     localStorage.setItem("parkInfo", JSON.stringify(savedParks));
 };
 
+var loadSavedParks = function() {
+    savedParks = JSON.parse(localStorage.getItem("parkInfo"));
+
+    // if local storage is null, recreate array to hold saved parks
+    if (!savedParks) {
+        savedParks = [];
+    }
+};
+
+loadSavedParks();
+// This will be triggered by a clicking event
 getParkInfo(userInput);
+
+// All of the properties of currentPark object will be displayed on the screen.
+// If there are objects in the savedParks array, they will be displayed on the page as well
+// I'm thinking maybe we do that with a modal that says "see saved parks" and then the list 
+// pops up in a modal when it is clicked
