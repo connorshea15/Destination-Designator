@@ -97,9 +97,10 @@ var loadSavedParks = function() {
     }
 };
 
-loadSavedParks();
+
 // This will be triggered by a clicking event
 getParkInfo(userInput);
+loadSavedParks();
 
 // All of the properties of currentPark object will be displayed on the screen.
 // If there are objects in the savedParks array, they will be displayed on the page as well
