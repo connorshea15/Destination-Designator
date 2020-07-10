@@ -8,6 +8,9 @@ var currentPark = {
     weather:""
 };
 
+//Local storage variable to hold array of saved park objects
+var savedParks = [];
+
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -66,6 +69,9 @@ var getParkWeather = function(lat, lon) {
                 currentPark.temp = data.current.temp;
                 // Set the current park's weather description to the api description
                 currentPark.weather = data.current.weather[0].description;
+                // This is here for now for testing purposes. 
+                // It will eventually only execute after a button click
+                saveParks();
             });
         } else {
             alert("Error: " + response.statusText);
@@ -73,5 +79,15 @@ var getParkWeather = function(lat, lon) {
     });
 };
 
+// Pushing the save button will call this function to remember the parks name and url
+var saveParks = function() {
+    var savedParkInfo = {
+        name: currentPark.name,
+        url: currentPark.url
+    }; 
+    // Push new park object onto the end of our savedParks array 
+    savedParks.push(savedParkInfo);
+    localStorage.setItem("parkInfo", JSON.stringify(savedParks));
+};
+
 getParkInfo(userInput);
-console.log(currentPark);
