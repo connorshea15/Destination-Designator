@@ -7,7 +7,8 @@ var currentPark = {
     temp:"",
     weather:""
 };
-
+//Local storage variable to hold array of saved park objects
+var savedParks = [];
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -66,6 +67,9 @@ var getParkWeather = function(lat, lon) {
                 currentPark.temp = data.current.temp;
                 // Set the current park's weather description to the api description
                 currentPark.weather = data.current.weather[0].description;
+                // This is here for now for testing purposes. 
+                // It will eventually only execute after a button click
+                saveParks();
             });
         } else {
             alert("Error: " + response.statusText);
@@ -73,5 +77,32 @@ var getParkWeather = function(lat, lon) {
     });
 };
 
+// Pushing the save button will call this function to remember the parks name and url
+var saveParks = function() {
+    var savedParkInfo = {
+        name: currentPark.name,
+        url: currentPark.url
+    }; 
+    // Push new park object onto the end of our savedParks array 
+    savedParks.push(savedParkInfo);
+    localStorage.setItem("parkInfo", JSON.stringify(savedParks));
+};
+
+var loadSavedParks = function() {
+    savedParks = JSON.parse(localStorage.getItem("parkInfo"));
+
+    // if local storage is null, recreate array to hold saved parks
+    if (!savedParks) {
+        savedParks = [];
+    }
+};
+
+
+// This will be triggered by a clicking event
 getParkInfo(userInput);
-console.log(currentPark);
+loadSavedParks();
+
+// All of the properties of currentPark object will be displayed on the screen.
+// If there are objects in the savedParks array, they will be displayed on the page as well
+// I'm thinking maybe we do that with a modal that says "see saved parks" and then the list 
+// pops up in a modal when it is clicked
