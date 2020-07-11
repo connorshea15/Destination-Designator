@@ -1,0 +1,23 @@
+
+
+body{
+
+    background-image: url(wildlife.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transparent-background{
+    background-color: rgba(252, 249, 249, 0.5) !important;
+    
+
+}
+
