@@ -15,6 +15,8 @@ var savedParkButtonEl = document.getElementById("see-saved-parks");
 var savedParkModalEl = document.getElementById("saved-park-modal");
 // variable for the modal close button
 var modalCloseEl = document.getElementById("modal-close");
+// Saved Park Modal list area 
+var savedParkList = document.getElementById("park-list");
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -103,21 +105,38 @@ var loadSavedParks = function() {
     }
 };
 
-// Function to activate the saved park modal
-var activateModal = function(event) {
-    savedParkModalEl.style.display = "block";
+// Display saved parks in the modal
+var displaySavedParks = function() {
+    savedParkList.innerHTML = "";
+    if (savedParks.length === 0) {
+        savedParkList.textContent = "You have no saved parks!"
+    } else {
+        for (i = 0; i < savedParks.length; i++) {
+            // create list element to hold saved park name
+            var newParkEl = document.createElement("li");
+            // create link element to put in list element
+            var newParkLinkEl = document.createElement("a");
+            newParkLinkEl.textContent = savedParks[i].name;
+            newParkLinkEl.href = savedParks[i].url;
+            newParkEl.appendChild(newParkLinkEl);
+            savedParkList.appendChild(newParkEl);
+        }
+    }
 };
 
+// Open saved park modal when button is clicked
+savedParkButtonEl.onclick = function() {
+    savedParkModalEl.style.display = "block";
+    displaySavedParks();
+}
+
+// Close saved park modal when button is clicked
 modalCloseEl.onclick = function() {
     savedParkModalEl.style.display = "none";
 }
 
 // This will be triggered by a clicking event
-// getParkInfo(userInput);
+getParkInfo(userInput);
 loadSavedParks();
-savedParkButtonEl.addEventListener("click", activateModal);
 
 // All of the properties of currentPark object will be displayed on the screen.
-// If there are objects in the savedParks array, they will be displayed on the page as well
-// I'm thinking maybe we do that with a modal that says "see saved parks" and then the list 
-// pops up in a modal when it is clicked

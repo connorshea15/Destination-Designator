@@ -24,4 +24,5 @@ body{
 /* space the modal from the top of the browser */
 #modal-body {
     top: 30%;
+    bottom: 10%
 }
