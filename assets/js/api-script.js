@@ -9,6 +9,12 @@ var currentPark = {
 };
 //Local storage variable to hold array of saved park objects
 var savedParks = [];
+// DOM representation of the see saved parks button
+var savedParkButtonEl = document.getElementById("see-saved-parks");
+// variable to represent the saved park Modal
+var savedParkModalEl = document.getElementById("saved-park-modal");
+// variable for the modal close button
+var modalCloseEl = document.getElementById("modal-close");
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -97,10 +103,19 @@ var loadSavedParks = function() {
     }
 };
 
+// Function to activate the saved park modal
+var activateModal = function(event) {
+    savedParkModalEl.style.display = "block";
+};
+
+modalCloseEl.onclick = function() {
+    savedParkModalEl.style.display = "none";
+}
 
 // This will be triggered by a clicking event
-getParkInfo(userInput);
+// getParkInfo(userInput);
 loadSavedParks();
+savedParkButtonEl.addEventListener("click", activateModal);
 
 // All of the properties of currentPark object will be displayed on the screen.
 // If there are objects in the savedParks array, they will be displayed on the page as well

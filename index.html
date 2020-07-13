@@ -11,15 +11,9 @@
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
    <title>Destination Designator</title>
-
-   <style>
-  
-   </style>
-
 </head>
 <body class="is-fullheight">
  <div class="container">
-    
     <div class="block">
          <nav class="nav">
              <div class="nav-left">
@@ -27,7 +21,6 @@
                      <h1 class="title is-4">Destination Designator</h1>
                  </a>
              </div>
-
              <div class="nav-center">
                  <a href="" class="nav-item">
                      <span class="icon">
@@ -40,22 +33,23 @@
                     </span>
                 </a>
              </div>
-
-
          </nav>
       <div class="block">
           <div class="notification is-dark">
-          <h1 class="title is-1">Welcome to Destination Designator</h1>
-          <h2 class="subtitle is-4">Well help you find your National Park for your favorite outdoor activity!</h2>
-          <button href="" class="button is-black is-large">Find your park.</button>
+            <h1 class="title is-1">Welcome to Destination Designator</h1>
+            <h2 class="subtitle is-4">Well help you find your National Park for your favorite outdoor activity!</h2>
+            <div class="columns is-12">
+                <button href="" class="button is-black is-large column is-3">Find Your Park.</button>
+                <div class="column is-half"></div>
+                <button href="" class="button is-black is-large column is-3" id="see-saved-parks">See Saved Parks.</button>
+            </div>
+  
           </div>
-          
       </div>
-      
       <div class="block3">
    
                
-          </div>
+    </div>
       </section>
       </div>
       <div class="block">
@@ -73,12 +67,27 @@
             <div class="notification is-transparent">
               <h2 class="subtitle is-6">Group Project 1:     Site created by Group G6.</h2>
         </div> 
-
-       
-           
-       
      </div>
- </div>   
+ </div>
+ <div class="modal" id="saved-park-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card" id="modal-body">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Saved Parks</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <ul>
+            <li>Park Goes Here</li>
+            <li>Park Goes Here</li>
+            <li>Park Goes Here</li>
+        </ul>
+      </section>
+      <footer class="modal-card-foot">
+          <button class="modal-close is-large" aria-label="close" id="modal-close"></button>
+      </footer>
+    </div>
+  </div>   
 </body>
 
 </html>
