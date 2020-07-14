@@ -10,7 +10,7 @@ var currentPark = {
 //Local storage variable to hold array of saved park objects
 var savedParks = [];
 // This is just to mimic passing user input into the getParkInfo function
-var userInput = "hunting";
+var userInput = "fishing";
 
 // This function will accept the user input activity type and search the park database for parks associated with that activity
 var getParkInfo = function(userInput) {
@@ -35,6 +35,24 @@ var getParkInfo = function(userInput) {
         } else {
             alert("Error: " + response.statusText);
         }
+        //Creating an if statement to match drop-down items with the userInput field to place selected value into fetch search
+        if(userSelect = "fishing"){
+            var userInput = "fishing"}
+        else{};
+        if(userSelect = "hiking"){
+            var userInput = "hiking"
+        }
+        else{};
+        if(userSelect = "hunting"){
+            var userInput = "hunting"
+        }
+        else{};
+        if(userSelect = "climbing"){
+            var userInput = "climbing"
+        }
+        else{};
+
+
     });
 };
 
@@ -99,10 +117,85 @@ var loadSavedParks = function() {
 
 
 // This will be triggered by a clicking event
-getParkInfo(userInput);
+// $("modBut")
+// (getParkInfo)
 loadSavedParks();
 
 // All of the properties of currentPark object will be displayed on the screen.
 // If there are objects in the savedParks array, they will be displayed on the page as well
 // I'm thinking maybe we do that with a modal that says "see saved parks" and then the list 
 // pops up in a modal when it is clicked
+
+
+// var butGet = document.getItem("parkInfo");
+// var butLink = document.getElementById("findParkButt");
+//     butLink.innerHTML = butGet[i].name;
+//     butLink.appendChild();
+
+function displayRandoParks() {
+    var parkAppend = localStorage.getItem("parkInfo"); //If I have to make html elements myself...
+    var parkAppendII =document.getElementById("findParkBlock")
+    console.log(parkAppendII)
+
+    var weatherAppend = localStorage.getItem("getParkWeather")
+    var weatherAppendII = document.getElementById("findParkBlock")
+    console.log(weatherAppendII);
+       
+    // parkAppendII.innerHTML = parkAppend;
+    parkAppend = JSON.parse(parkAppend);
+    console.log(typeof parkAppend);
+    for(let i=0; i<parkAppend.length; i++) {
+    
+        
+    var createPOne = document.createElement('h2')
+    console.log(parkAppend[i].name);
+    createPOne.innerHTML = parkAppend[i].name;
+    parkAppendII.appendChild(createPOne);
+        
+    var UrlPOne = document.createElement('h2')
+    UrlPOne.innerHTML = parkAppend[i].url;
+    parkAppendII.appendChild(UrlPOne);
+    
+    createPOne.classList.add("C-1") }//filler class name until I get real names from html/css
+
+    //Attempting to recreate append of park name & url with a weather aspect
+    weatherAppend = JSON.parse(weatherAppend);
+    console.log(typeof weatherAppend);
+
+    var createWOne = document.createElement('h2');
+    console.log(weatherAppend);
+    createWOne.innerHTML = weatherAppend;
+    weatherAppend.appendChild(createWOne);
+    //MUST FIX RETURNS NULL AT THIS TIME
+    
+}
+
+displayRandoParks();
+
+
+
+//modal javascript
+
+var modalBtn = $('.modalBtn');
+var modalBg = $('.modal-bg');
+var modalClose = $('.modal-close');
+
+modalBtn.addEventListener('click', function(){
+    modalBg.classList.add('bg-active');
+})
+modalClose.addEventListener('click', function(){
+    modalBg.classList.remove('bg-active');
+})
+
+//include drop down with activity options: fishing, hiking, hunting, climbing, etc.
+
+
+
+
+//connect user choice to api for park suggestion
+
+
+
+//ensure park suggestion appears on page 
+
+//create an if statement 
