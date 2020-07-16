@@ -57,6 +57,7 @@
         <h1 class="title is-1" id="park-title"></h1>
         <a id="parkUrlDisplay"></a>
         <h2 class="subtitle is-4" id="tempPark"></h2>
+        <button class="button is-black is-large is-narrow" id="save-park-button">Save Park!</button>
         </div>
 
         <div class="notification transparent-background">
@@ -72,12 +73,28 @@
 
  <div class="modal" id="find-park-modal">
   <div class="modal-background"></div>
-  <div class="modal-card">
+  <div class="modal-card" id="find-modal-body">
     <header class="modal-card-head">
       <p class="modal-card-title">Choose your favorite Activity!</p>
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <div class="select is-fullwidth">
+            <select name="country" id="activity-options">
+              <option value="hiking">Hiking</option>
+              <option value="hunting">Hunting</option>
+              <option value="swimming">Swimming</option>
+              <option value="astronomy">Astronomy</option>
+              <option value="fishing">Fishing</option>
+            </select>
+          </div>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary" id="choose-activity-button">Choose</button>
+        </div>
+      </div>
     </section>
     <footer class="modal-card-foot">
         <button class="modal-close is-large" aria-label="close" id="find-modal-close">Hello</button>
