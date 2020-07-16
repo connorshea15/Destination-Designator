@@ -78,6 +78,7 @@ var getParkWeather = function(lat, lon) {
                 // This is here for now for testing purposes. 
                 // It will eventually only execute after a button click
                 saveParks();
+                displayRandoParks(currentPark);
             });
         } else {
             alert("Error: " + response.statusText);
@@ -134,6 +135,36 @@ savedParkButtonEl.onclick = function() {
 modalCloseEl.onclick = function() {
     savedParkModalEl.style.display = "none";
 }
+
+
+function displayRandoParks(currentPark) {
+    console.log(currentPark);
+    var parkAppend = currentPark;
+    var parkAppendII =document.getElementById("findParkBlock")
+    console.log(parkAppendII)
+
+    var createPOne = document.createElement('h2')
+    createPOne.innerHTML = parkAppend.name;
+    
+    document.getElementById("park-title").innerHTML = parkAppend.name + " , S" + parkAppend.states;
+    document.getElementById("parkUrlDisplay").innerHTML = parkAppend.url;
+    document.getElementById("parkUrlDisplay").href = parkAppend.url;
+
+    document.getElementById("tempPark").innerHTML = "The current temperature is " + parkAppend.temp + " °F  </br>Weather: " + parkAppend.weather;
+    document.getElementById("img").src = parkAppend.imageUrl;
+    
+    //dyanmically create button to save parks and data (bottom center position for button)
+    
+    var savedParkButt = document.createElement('button');
+    savedParkButt.id = 'saved';
+    savedParkButt.innerHTML = 'Save Park!';
+    savedParkButt.setAttribute("class", "button is-black is-large is-narrow")
+    parkAppendII.appendChild(savedParkButt); 
+}
+
+
+
+
 
 // This will be triggered by a clicking event
 getParkInfo(userInput);
