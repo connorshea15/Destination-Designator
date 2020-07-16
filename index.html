@@ -39,7 +39,7 @@
             <h1 class="title is-1">Welcome to Destination Designator</h1>
             <h2 class="subtitle is-4">Well help you find your National Park for your favorite outdoor activity!</h2>
             <div class="columns is-12">
-                <button href="" class="button is-black is-large column is-3">Find Your Park.</button>
+                <button href="" class="button is-black is-large column is-3" id="find-park-button">Find Your Park.</button>
                 <div class="column is-half"></div>
                 <button href="" class="button is-black is-large column is-3" id="see-saved-parks">See Saved Parks.</button>
             </div>
@@ -69,6 +69,23 @@
         </div> 
      </div>
  </div>
+
+ <div class="modal" id="find-park-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Choose your favorite Activity!</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+    </section>
+    <footer class="modal-card-foot">
+        <button class="modal-close is-large" aria-label="close" id="find-modal-close">Hello</button>
+    </footer>
+  </div>
+</div> 
+
+
  <div class="modal" id="saved-park-modal">
     <div class="modal-background"></div>
     <div class="modal-card" id="modal-body">

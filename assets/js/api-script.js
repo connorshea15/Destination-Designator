@@ -11,12 +11,18 @@ var currentPark = {
 var savedParks = [];
 // DOM representation of the see saved parks button
 var savedParkButtonEl = document.getElementById("see-saved-parks");
+// DOM representation of the find park button
+var findParkButtonEl = document.getElementById("find-park-button");
 // variable to represent the saved park Modal
 var savedParkModalEl = document.getElementById("saved-park-modal");
 // variable for the modal close button
 var modalCloseEl = document.getElementById("modal-close");
+// var for the modal close button for the find park modal
+var findModalCloseEl = document.getElementById("find-modal-close");
 // Saved Park Modal list area 
 var savedParkList = document.getElementById("park-list");
+// variable to represent the find park modal
+var findParkModalEl = document.getElementById("find-park-modal");
 // This is just to mimic passing user input into the getParkInfo function
 var userInput = "hunting";
 
@@ -135,6 +141,15 @@ modalCloseEl.onclick = function() {
     savedParkModalEl.style.display = "none";
 }
 
+// open find parks modal when find parks button is clicked 
+findParkButtonEl.onclick = function() {
+    findParkModalEl.style.display = "block";
+}
+
+// Close find parks modal when find parks button is clicked
+findModalCloseEl.onclick = function() {
+    findParkModalEl.style.display = "none";
+}
 
 function displayRandoParks(currentPark) {
     console.log(currentPark);
