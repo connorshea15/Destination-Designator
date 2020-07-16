@@ -118,9 +118,9 @@ function displayRandoParks(currentPark) {
     var createPOne = document.createElement('h2')
     createPOne.innerHTML = parkAppend.name;
     
-    document.getElementById("park-title").innerHTML = parkAppend.name + " , " + parkAppend.states;
+    document.getElementById("park-title").innerHTML = parkAppend.name + " , S" + parkAppend.states;
     document.getElementById("parkUrlDisplay").innerHTML = parkAppend.url;
-    // Make URL clickable 
+    document.getElementById("parkUrlDisplay").href = parkAppend.url;
 
     document.getElementById("tempPark").innerHTML = "The current temperature is " + parkAppend.temp + " °F "
     document.getElementById("img").src = parkAppend.imageUrl;
