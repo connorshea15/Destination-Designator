@@ -120,19 +120,21 @@ function displayRandoParks(currentPark) {
     
     document.getElementById("park-title").innerHTML = parkAppend.name + " , " + parkAppend.states;
     document.getElementById("parkUrlDisplay").innerHTML = parkAppend.url;
-    // Make URL clickable
-
-
-   
-
+    // Make URL clickable 
 
     document.getElementById("tempPark").innerHTML = "The current temperature is " + parkAppend.temp + " °F "
     document.getElementById("img").src = parkAppend.imageUrl;
     
     //dyanmically create button to save parks and data (bottom center position for button)
     
+    var savedParkButt = document.createElement('button');
+    savedParkButt.id = 'saved';
+    savedParkButt.innerHTML = 'Click to see saved parks!';
+    savedParkButt.style.background = '#3dfe3a';
+    document.body.appendChild(savedParkButt);
 
-
+    //get button to link with local storage and display old parks
+    
 
  
 }
