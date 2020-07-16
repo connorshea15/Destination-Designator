@@ -13,13 +13,14 @@ var savedParks = [];
 var userInput = "fishing";
 
 // This function will accept the user input activity type and search the park database for parks associated with that activity
-var getParkInfo = function(userInput) {
+var getParkInfo = function() {
     var apiUrl = "https://developer.nps.gov/api/v1/activities/parks?q=" + userInput + "&api_key=SL6NUAYKuQc9Oci5uYIesi64ujlohyYU5Oshn7zb";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 // Save the array of park objects in variable parkArr
+                console.log(data);
                 var parkArr = data.data[0].parks;
                 // I need a random number between 0 and the length of the parkArr
                 var randomIndex = Math.floor(Math.random() * parkArr.length);
@@ -35,24 +36,7 @@ var getParkInfo = function(userInput) {
         } else {
             alert("Error: " + response.statusText);
         }
-        //Creating an if statement to match drop-down items with the userInput field to place selected value into fetch search
-        if(userSelect = "fishing"){
-            var userInput = "fishing"}
-        else{};
-        if(userSelect = "hiking"){
-            var userInput = "hiking"
-        }
-        else{};
-        if(userSelect = "hunting"){
-            var userInput = "hunting"
-        }
-        else{};
-        if(userSelect = "climbing"){
-            var userInput = "climbing"
-        }
-        else{};
-
-
+        
     });
 };
 
@@ -76,6 +60,7 @@ var getParkCoordinates = function(parkCode) {
 
 // pass lat and long of park to weather API to get current weather and description
 var getParkWeather = function(lat, lon) {
+    console.log(lat , lon);
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily&units=imperial&appid=055086f19492c21b798cb63cdcd21457"
 
     fetch(apiUrl).then(function(response) {
@@ -88,6 +73,7 @@ var getParkWeather = function(lat, lon) {
                 // This is here for now for testing purposes. 
                 // It will eventually only execute after a button click
                 saveParks();
+                displayRandoParks(currentPark);
             });
         } else {
             alert("Error: " + response.statusText);
@@ -115,10 +101,6 @@ var loadSavedParks = function() {
     }
 };
 
-
-// This will be triggered by a clicking event
-// $("modBut")
-// (getParkInfo)
 loadSavedParks();
 
 // All of the properties of currentPark object will be displayed on the screen.
@@ -127,75 +109,37 @@ loadSavedParks();
 // pops up in a modal when it is clicked
 
 
-// var butGet = document.getItem("parkInfo");
-// var butLink = document.getElementById("findParkButt");
-//     butLink.innerHTML = butGet[i].name;
-//     butLink.appendChild();
-
-function displayRandoParks() {
-    var parkAppend = localStorage.getItem("parkInfo"); //If I have to make html elements myself...
+function displayRandoParks(currentPark) {
+    console.log(currentPark);
+    var parkAppend = currentPark;
     var parkAppendII =document.getElementById("findParkBlock")
     console.log(parkAppendII)
 
-    var weatherAppend = localStorage.getItem("getParkWeather")
-    var weatherAppendII = document.getElementById("findParkBlock")
-    console.log(weatherAppendII);
-       
-    // parkAppendII.innerHTML = parkAppend;
-    parkAppend = JSON.parse(parkAppend);
-    console.log(typeof parkAppend);
-    for(let i=0; i<parkAppend.length; i++) {
-    
-        
     var createPOne = document.createElement('h2')
-    console.log(parkAppend[i].name);
-    createPOne.innerHTML = parkAppend[i].name;
-    parkAppendII.appendChild(createPOne);
-        
-    var UrlPOne = document.createElement('h2')
-    UrlPOne.innerHTML = parkAppend[i].url;
-    parkAppendII.appendChild(UrlPOne);
+    createPOne.innerHTML = parkAppend.name;
     
-    createPOne.classList.add("C-1") }//filler class name until I get real names from html/css
+    document.getElementById("park-title").innerHTML = parkAppend.name + " , " + parkAppend.states;
+    document.getElementById("parkUrlDisplay").innerHTML = parkAppend.url;
+    // Make URL clickable
 
-    //Attempting to recreate append of park name & url with a weather aspect
-    weatherAppend = JSON.parse(weatherAppend);
-    console.log(typeof weatherAppend);
 
-    var createWOne = document.createElement('h2');
-    console.log(weatherAppend);
-    createWOne.innerHTML = weatherAppend;
-    weatherAppend.appendChild(createWOne);
-    //MUST FIX RETURNS NULL AT THIS TIME
+   
+
+
+    document.getElementById("tempPark").innerHTML = "The current temperature is " + parkAppend.temp + " °F "
+    document.getElementById("img").src = parkAppend.imageUrl;
     
+    //dyanmically create button to save parks and data (bottom center position for button)
+    
+
+
+
+ 
 }
 
-displayRandoParks();
-
-
-
-//modal javascript
-
-var modalBtn = $('.modalBtn');
-var modalBg = $('.modal-bg');
-var modalClose = $('.modal-close');
-
-modalBtn.addEventListener('click', function(){
-    modalBg.classList.add('bg-active');
-})
-modalClose.addEventListener('click', function(){
-    modalBg.classList.remove('bg-active');
-})
-
-//include drop down with activity options: fishing, hiking, hunting, climbing, etc.
+document.getElementById("findParkButt").addEventListener('click' , getParkInfo);
 
 
 
 
-//connect user choice to api for park suggestion
 
-
-
-//ensure park suggestion appears on page 
-
-//create an if statement 
