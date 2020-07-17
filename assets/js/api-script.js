@@ -9,8 +9,29 @@ var currentPark = {
 };
 //Local storage variable to hold array of saved park objects
 var savedParks = [];
-// This is just to mimic passing user input into the getParkInfo function
-var userInput = "hunting";
+// DOM representation of the see saved parks button
+var savedParkButtonEl = document.getElementById("see-saved-parks");
+// DOM representation of the find park button
+var findParkButtonEl = document.getElementById("find-park-button");
+// Variable for choose activity button in find park modal
+var chooseActivityButtonEl = document.getElementById("choose-activity-button");
+// variable to represent the saved park Modal
+var savedParkModalEl = document.getElementById("saved-park-modal");
+// variable for the modal close button
+var modalCloseEl = document.getElementById("modal-close");
+// var for the modal close button for the find park modal
+var findModalCloseEl = document.getElementById("find-modal-close");
+// Saved Park Modal list area 
+var savedParkList = document.getElementById("park-list");
+// variable to represent the find park modal
+var findParkModalEl = document.getElementById("find-park-modal");
+// variable to represent the save park button
+var saveParkButtonEl = document.getElementById("save-park-button");
+// variable to take the user input
+var activityOptionEl = document.getElementById("activity-options");
+
+// initially hide the save park button that will populate with current park info
+saveParkButtonEl.style.display = "none";
 
 // This function will accept the user input activity type and search the park database for parks associated with that activity
 var getParkInfo = function(userInput) {
@@ -69,7 +90,7 @@ var getParkWeather = function(lat, lon) {
                 currentPark.weather = data.current.weather[0].description;
                 // This is here for now for testing purposes. 
                 // It will eventually only execute after a button click
-                saveParks();
+                displayRandoParks(currentPark);
             });
         } else {
             alert("Error: " + response.statusText);
@@ -83,9 +104,9 @@ var saveParks = function() {
         name: currentPark.name,
         url: currentPark.url
     }; 
-    // Push new park object onto the end of our savedParks array 
-    savedParks.push(savedParkInfo);
-    localStorage.setItem("parkInfo", JSON.stringify(savedParks));
+        // Push new park object onto the end of our savedParks array 
+        savedParks.push(savedParkInfo);
+        localStorage.setItem("parkInfo", JSON.stringify(savedParks));
 };
 
 var loadSavedParks = function() {
@@ -97,12 +118,71 @@ var loadSavedParks = function() {
     }
 };
 
+// Display saved parks in the modal
+var displaySavedParks = function() {
+    savedParkList.innerHTML = "";
+    if (savedParks.length === 0) {
+        savedParkList.textContent = "You have no saved parks!"
+    } else {
+        for (i = 0; i < savedParks.length; i++) {
+            // create list element to hold saved park name
+            var newParkEl = document.createElement("li");
+            // create link element to put in list element
+            var newParkLinkEl = document.createElement("a");
+            newParkLinkEl.textContent = savedParks[i].name;
+            newParkLinkEl.href = savedParks[i].url;
+            newParkEl.appendChild(newParkLinkEl);
+            savedParkList.appendChild(newParkEl);
+        }
+    }
+};
 
-// This will be triggered by a clicking event
-getParkInfo(userInput);
+// Open saved park modal when button is clicked
+savedParkButtonEl.onclick = function() {
+    savedParkModalEl.style.display = "block";
+    displaySavedParks();
+}
+
+// Close saved park modal when button is clicked
+modalCloseEl.onclick = function() {
+    savedParkModalEl.style.display = "none";
+}
+
+// open find parks modal when find parks button is clicked 
+findParkButtonEl.onclick = function() {
+    findParkModalEl.style.display = "block";
+}
+
+// Close find parks modal when find parks button is clicked
+findModalCloseEl.onclick = function() {
+    findParkModalEl.style.display = "none";
+}
+
+// Funciton to display info gathered by apis 
+function displayRandoParks(currentPark) {
+    var parkAppend = currentPark;
+    var parkAppendII = document.getElementById("findParkBlock");
+
+    var createPOne = document.createElement('h2')
+    createPOne.innerHTML = parkAppend.name;
+    
+    document.getElementById("park-title").innerHTML = parkAppend.name + " , S" + parkAppend.states;
+    document.getElementById("parkUrlDisplay").innerHTML = parkAppend.url;
+    document.getElementById("parkUrlDisplay").href = parkAppend.url;
+
+    document.getElementById("tempPark").innerHTML = "The current temperature is " + parkAppend.temp + " °F  </br>Weather: " + parkAppend.weather;
+    document.getElementById("img").src = parkAppend.imageUrl;
+
+    saveParkButtonEl.style.display = "block";
+    saveParkButtonEl.addEventListener('click' , saveParks);
+}
+
+// Accept input from modal and pass it to the getparkInfo function
+var acceptInput = function() {
+    findParkModalEl.style.display = "none";
+    getParkInfo(activityOptionEl.value);
+};
+
 loadSavedParks();
 
-// All of the properties of currentPark object will be displayed on the screen.
-// If there are objects in the savedParks array, they will be displayed on the page as well
-// I'm thinking maybe we do that with a modal that says "see saved parks" and then the list 
-// pops up in a modal when it is clicked
+chooseActivityButtonEl.addEventListener("click", acceptInput);
