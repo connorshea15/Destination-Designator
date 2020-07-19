@@ -31,3 +31,18 @@ body{
     top: 30%;
     bottom: 10%
 }
+#parkUrlDisplay{
+    font-weight: bolder;
+    font-size: larger;
+    margin-bottom: 1rem;
+}
+#park-title {
+    font-style: oblique;
+    font-weight: bolder;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+#tempPark {
+    font-weight: bolder;
+    padding-bottom: 2rem;
+}
