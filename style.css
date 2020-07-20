@@ -1,4 +1,14 @@
-
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+ }
+ 
+ body {
+    margin: 0px;
+    min-height: 100%;
+    width: 100%;
+ }
 
 body{
 
@@ -30,4 +40,19 @@ body{
 #find-modal-body {
     top: 30%;
     bottom: 10%
+}
+#parkUrlDisplay{
+    font-weight: bolder;
+    font-size: larger;
+    margin-bottom: 1rem;
+}
+#park-title {
+    font-style: oblique;
+    font-weight: bolder;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+#tempPark {
+    font-weight: bolder;
+    padding-bottom: 2rem;
 }

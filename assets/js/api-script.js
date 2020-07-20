@@ -29,9 +29,13 @@ var findParkModalEl = document.getElementById("find-park-modal");
 var saveParkButtonEl = document.getElementById("save-park-button");
 // variable to take the user input
 var activityOptionEl = document.getElementById("activity-options");
+// Get image element
+var parkImageEl = document.getElementById("img");
 
 // initially hide the save park button that will populate with current park info
 saveParkButtonEl.style.display = "none";
+// initially hide the park image that will populate with current park info
+parkImageEl.style.display = "none";
 
 // This function will accept the user input activity type and search the park database for parks associated with that activity
 var getParkInfo = function(userInput) {
@@ -174,6 +178,8 @@ function displayRandoParks(currentPark) {
     document.getElementById("img").src = parkAppend.imageUrl;
 
     saveParkButtonEl.style.display = "block";
+
+    parkImageEl.style.display = "block";
     saveParkButtonEl.addEventListener('click' , saveParks);
 }
 
