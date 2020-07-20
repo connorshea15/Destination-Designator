@@ -37,7 +37,7 @@
       <div class="block">
           <div class="notification is-dark">
             <h1 class="title is-1">Welcome to Destination Designator</h1>
-            <h2 class="subtitle is-4">Well help you find your National Park for your favorite outdoor activity!</h2>
+            <h2 class="subtitle is-4">We'll help you find your National Park for your favorite outdoor activity!</h2>
             <div class="columns is-12">
                 <button href="" class="button is-black is-large column is-3" id="find-park-button">Find Your Park.</button>
                 <div class="column is-half"></div>
@@ -54,23 +54,29 @@
       </div>
       <div class="block">
         <strong>
-        <div class="notification transparent-background" id="findParkBlock">
-        <h1 class="title is-1" id="park-title"></h1>
-        <a id="parkUrlDisplay"></a>
-        <h2 class="subtitle is-4" id="tempPark"></h2>
+          <div class="notification transparent-background" id="findParkBlock">
+            <h1 class="title is-1 has-text-centered" id="park-title"></h1>
+            <div class="columns is-12 level">
+              <img id="img" class="column is-4" width="200" height="200"></img>
+              <div class="column is-8">
+                <a id="parkUrlDisplay"></a>
+                <h2 class="subtitle is-4" id="tempPark"></h2>
+              </div>
+            </div>
+            <button class="button is-black is-large is-narrow" id="save-park-button">Save Park!</button>
+          </div>
         </strong>
-        <button class="button is-black is-large is-narrow" id="save-park-button">Save Park!</button>
-        </div>
+      </div>
 
-        <div class="notification transparent-background">
+        <!-- <div class="notification transparent-background">
           <img id="img" width="200" height="200"></img>
-        </div>
+        </div> -->
         
         <div class="block">
             <div class="notification is-transparent">
               <h2 class="subtitle is-6">Group Project 1:     Site created by Group G6.</h2>
-        </div> 
-     </div>
+            </div> 
+        </div>
  </div>
 
  <div class="modal" id="find-park-modal">
